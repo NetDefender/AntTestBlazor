@@ -4,9 +4,10 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<ContainerRegistry></ContainerRegistry>
-		<ContainerImageName>netdefender/blazor-ssr</ContainerImageName>
-		<ContainerRepository>netdefender/blazor-ssr</ContainerRepository>
+		<ContainerImageName>netdefender/blazor-ssr-ant</ContainerImageName>
+		<ContainerRepository>netdefender/blazor-ssr-ant</ContainerRepository>
 		<ContainerRuntimeIdentifier>linux-x64</ContainerRuntimeIdentifier>
+		<MinVerDefaultPreReleaseIdentifiers>rc.0</MinVerDefaultPreReleaseIdentifiers>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -25,11 +26,6 @@
 	<ItemGroup>
 		<Folder Include="wwwroot\assets\" />
 	</ItemGroup>
-
-	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-	</PropertyGroup>
 
 	<ItemGroup>
 		<ContainerEnvironmentVariable Include="ASPNETCORE_URLS" Value="http://*:8080/" />

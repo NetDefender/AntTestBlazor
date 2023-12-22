@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34407.89
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntTestBlazor", "AntTestBlazor\AntTestBlazor.csproj", "{DDD22977-5EEE-4682-AFD7-96300F2E926E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AntTestBlazor", "AntTestBlazor\AntTestBlazor.csproj", "{DDD22977-5EEE-4682-AFD7-96300F2E926E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AntTestBlazor.Client", "AntTestBlazor.Client\AntTestBlazor.Client.csproj", "{5B0797BF-4E40-430E-A6BA-85581FCC90AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AntTestBlazor.Client", "AntTestBlazor.Client\AntTestBlazor.Client.csproj", "{5B0797BF-4E40-430E-A6BA-85581FCC90AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BC2F8591-C767-47A1-8462-F4B4DC98A46C}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
