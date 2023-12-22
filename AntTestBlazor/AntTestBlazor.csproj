@@ -28,7 +28,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ContainerEnvironmentVariable Include="ASPNETCORE_URLS" Value="http://*:8080/" />
+		<ContainerEnvironmentVariable Include="ASPNETCORE_URLS" Value="http://*:8081/" />
 	</ItemGroup>
 
 	<Target Name="ContainerTag" AfterTargets="MinVer">

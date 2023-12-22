@@ -10,7 +10,7 @@ Generate image:
 
 Run locally:
 
-`docker run -p 8080:8080 netdefender/blazor-ssr-ant:<Tag>`
+`docker run -p 8081:8081 netdefender/blazor-ssr-ant:<Tag>`
 
 Push:
 
