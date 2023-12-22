@@ -1,0 +1,50 @@
+﻿@page "/weather"
+@attribute [StreamRendering]
+
+@using System.ComponentModel
+@using AntDesign.TableModels
+
+@if (_forecasts is null)
+{
+    <Spin />
+}
+else
+{
+    <Table @ref="_table" TItem="WeatherForecast" DataSource="@_forecasts" Total="_total" @bind-PageIndex="_pageIndex" @bind-PageSize="_pageSize" @bind-SelectedRows="_selectedRows" OnChange="OnChange" Size="TableSize.Small" RowKey="x=>x.Id">
+          <Selection Key="@(context.Id.ToString())" />
+          <PropertyColumn Property="c=>c.Id" Sortable />
+          <PropertyColumn Property="c=>c.Date" Format="yyyy-MM-dd" Sortable />
+          <PropertyColumn Property="c=>c.TemperatureC" Sortable />
+          <PropertyColumn Title="Hot" Property="c=>c.Hot">
+            <Switch @bind-Value="@context.Hot"></Switch>
+          </PropertyColumn>
+          <PropertyColumn Property="c=>c.Summary" Sortable />
+          <ActionColumn Title="Action">
+            <Space>
+              <SpaceItem><Button Danger OnClick="()=>Delete(context.Id)">Delete</Button></SpaceItem>
+            </Space>
+          </ActionColumn>
+    </Table>
+
+    <div>
+        <GridRow>
+            <GridCol>
+                <Space>
+                    <SpaceItem>
+                        <Button Danger Size="small" OnClick="@(e => { _selectedRows = null; })">Clear</Button>
+                    </SpaceItem>
+                    @if (_selectedRows != null && _selectedRows.Any())
+                    {
+                        @foreach (WeatherForecast selected in _selectedRows)
+                        {
+                            <SpaceItem>
+                                <Tag @key="selected.Id" Closable OnClose="e => RemoveSelection(selected.Id)">@selected.Id - @selected.Summary</Tag>
+                            </SpaceItem>
+                        }
+                    }
+                </Space>
+            </GridCol>
+        </GridRow>
+        
+    </div>
+}

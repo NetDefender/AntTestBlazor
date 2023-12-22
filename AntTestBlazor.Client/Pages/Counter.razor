@@ -1,0 +1,12 @@
+﻿@page "/counter"
+
+<div>
+    <Space>
+        <SpaceItem>
+            <Button Type="@ButtonType.Primary" Icon="@IconType.Outline.Download" Shape="@ButtonShape.Round" OnClick="IncrementCount">Increment</Button>
+        </SpaceItem>
+    </Space>
+    <Space>
+        <SpaceItem>Count: @_currentCount</SpaceItem>
+    </Space>
+</div>
