@@ -1,20 +1,44 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<ContainerRegistry></ContainerRegistry>
+		<ContainerImageName>netdefender/blazor-ssr</ContainerImageName>
+		<ContainerRepository>netdefender/blazor-ssr</ContainerRepository>
+		<ContainerRuntimeIdentifier>linux-x64</ContainerRuntimeIdentifier>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AntTestBlazor.Client\AntTestBlazor.Client.csproj" />
-    <PackageReference Include="AntDesign" Version="0.16.3" />
-    <PackageReference Include="AntDesign.Charts" Version="0.4.0" />
-    <PackageReference Include="AntDesign.ProLayout" Version="0.16.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\AntTestBlazor.Client\AntTestBlazor.Client.csproj" />
+		<PackageReference Include="AntDesign" Version="0.16.3" />
+		<PackageReference Include="AntDesign.Charts" Version="0.4.0" />
+		<PackageReference Include="AntDesign.ProLayout" Version="0.16.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0" />
+		<PackageReference Include="Microsoft.NET.Build.Containers" Version="8.0.100" />
+		<PackageReference Include="MinVer" Version="4.3.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\assets\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="wwwroot\assets\" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ContainerEnvironmentVariable Include="ASPNETCORE_URLS" Value="http://*:8080/" />
+	</ItemGroup>
+
+	<Target Name="ContainerTag" AfterTargets="MinVer">
+		<PropertyGroup>
+			<ContainerImageTag>$(MinVerVersion)</ContainerImageTag>
+		</PropertyGroup>
+	</Target>
 
 </Project>
