@@ -1,0 +1,50 @@
+name: cd
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+  
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: dotnet-install
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+    - name: dotnet-restore
+      run: dotnet restore
+    - name: docker-login
+      shell: pwsh
+      run: |
+        echo "${{ secrets.DOCKER_TOKEN }}" | docker login --username netdefender --password-stdin
+    - name: dotnet-publish
+      run: dotnet publish AntTestBlazor/AntTestBlazor.csproj -p:PublishProfile=DefaultContainer -c Release -p:ContainerRegistry=docker.io
+    - name: minver-cli-install
+      run: dotnet tool install --global minver-cli
+    - name: minver-cli-value
+      run: |
+        version=$(minver -v e)
+        echo "DEPLOY_VERSION=$(echo $version)" >> $GITHUB_ENV
+    - name: minver-cli-show
+      run: |
+        echo ${{ env.DEPLOY_VERSION }}
+    - name: koyeb-install
+      uses: koyeb-community/install-koyeb-cli@v2
+      with:
+        api_token: "${{ secrets.KOYEB }}"
+    - name: koyeb-deploy
+      uses: koyeb/action-git-deploy@v1
+      with:
+        app-name: strong-dael
+        service-name: blazor-ssr-ant
+        service-instance-type: free
+        service-ports: 8080:http
+        service-routes: /:8080
+        docker: netdefender/blazor-ssr-ant:${{ env.DEPLOY_VERSION }}
